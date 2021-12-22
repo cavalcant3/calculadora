@@ -11,7 +11,7 @@ const deleter = document.querySelector('.del');
 const equaler = document.querySelector('.eq');
 const body = document.body;
 const cop = document.querySelector('.top');
-
+//const radio = document.getElementsByName("")
 
 
 
