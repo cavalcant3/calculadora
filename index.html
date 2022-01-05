@@ -1,85 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Calculator app</title>
-  <link rel="stylesheet" href="des.css" type="text/css"/>
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Spartan">
-  <script src="calc.js" defer></script>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .fundo{
+            background-image: linear-gradient(45deg,black, rgb(20, 23, 220));
+            height: 100vh;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        .calculadora{
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            border-radius: 15px;
+            padding: 15px;
+        }
+        .botao{
+            width: 50px;
+            height: 50px;
+            font-size: 25px;
+            cursor: pointer;
+            margin: 3px;
+            background-color: rgb(31,31,31);
+            border: none;
+            color: #fff;
+        }
+        .botao:hover{
+            background-color: black;
+        }
+        #resultado{
+            background-color: white;
+            width: 207px;
+            height: 30px;
+            margin: 5px;
+            font-size: 25px;
+            color: black;
+            text-align: right;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
-  
-
-  <div class="wrapper">
-
-     <div class="top">
-
-       <p>calc</p>
-       <div style="display: flex; align-items: center; justify-content: space-evenly; position: relative;">
-        <span style="margin-right: 20px; font-size: 8px; text-transform: uppercase; margin-top: 10px;">Theme</span>
-        <label class="theme">
-             1
-             <input type="radio" name="theme" value='1' checked ="checked" />
-            
-        </label>
-
-        <label class="theme">
-          2
-          <input type="radio" name="theme" value='2'/>
+    <div class="fundo">
+        
+        <div class="calculadora">
            
-        </label>
-
-        <label class="theme">
-          3
-          <input type="radio" name="theme" value='3'/>
-          
-        </label>
-      </div>
-     </div>
-
-     <input type="text" name="screen" class="screen" dir="rtl"/>
-
-
-     <div class="buttons">
-
-
-       <p class="button">7</p>
-       <p class="button">8</p>
-       <p class="button">9</p>
-       <p class="button del" style="color:white">DEL</p>
-       <p class="button">4</p>
-       <p class="button">5</p>
-       <p class="button">6</p>
-       <p class="button">+</p>
-       <p class="button">1</p>
-       <p class="button">2</p>
-       <p class="button">3</p>
-       <p class="button">-</p>
-       <p class="button">.</p>
-       <p class="button">0</p>
-       <p class="button">/</p>
-       <p class="button">x</p>
-       <p class="button re">RESET</p>
-       <p class="button eq">=</p>
-     </div>
-
-
-
-  </div>
-
-  
-   -->
-  
+            <p id="resultado"></p>
+            <table>
+                <tr>
+                    <td><button class="botao" onclick="clean()">C</button></td>
+                    <td><button class="botao" onclick="back()"><</button></td>
+                    <td><button class="botao" onclick="insert('/')">/</button></td>
+                    <td><button class="botao" onclick="insert('*')">X</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('7')">7</button></td>
+                    <td><button class="botao" onclick="insert('8')">8</button></td>
+                    <td><button class="botao" onclick="insert('9')">9</button></td>
+                    <td><button class="botao" onclick="insert('-')">-</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('4')">4</button></td>
+                    <td><button class="botao" onclick="insert('5')">5</button></td>
+                    <td><button class="botao" onclick="insert('6')">6</button></td>
+                    <td><button class="botao" onclick="insert('+')">+</button></td>
+                </tr>
+                <tr>
+                    <td><button class="botao" onclick="insert('1')">1</button></td>
+                    <td><button class="botao" onclick="insert('2')">2</button></td>
+                    <td><button class="botao" onclick="insert('3')">3</button></td>
+                    <td rowspan="2"><button class="botao" style="height: 106px;" onclick="calcular()">=</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button class="botao" style="width: 106px;" onclick="insert('0')">0</button></td>
+                    <td><button class="botao" onclick="insert('.')">.</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function insert(num)
+        {
+            var numero = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = numero + num;
+        }
+        function clean()
+        {
+            document.getElementById('resultado').innerHTML = "";
+        }
+        function back()
+        {
+            var resultado = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = resultado.substring(0, resultado.length -1);
+        }
+        function calcular()
+        {
+            var resultado = document.getElementById('resultado').innerHTML;
+            if(resultado)
+            {
+                document.getElementById('resultado').innerHTML = eval(resultado);
+            }
+            else
+            {
+                document.getElementById('resultado').innerHTML = "Nada..."
+            }
+        }
+    </script>
 </body>
 </html>
